@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS game_genres (
-  game_id             INT             NOT NULL,
-  genre_id            INT             NOT NULL,
+  game_id             BIGINT          NOT NULL,
+  genre_id            BIGINT          NOT NULL,
 
   PRIMARY KEY (game_id, genre_id),
   FOREIGN KEY (game_id) REFERENCES games(id)

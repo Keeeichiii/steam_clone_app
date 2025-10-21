@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS reviews (
-  id                  SERIAL          NOT NULL,
-  user_id             INT             NOT NULL,
-  game_id             INT             NOT NULL,
-  rating              SMALLINT        NOT NULL,
+  id                  BIGSERIAL       NOT NULL,
+  user_id             BIGINT          NOT NULL,
+  game_id             BIGINT          NOT NULL,
+  rating              SMALLINT        NOT NULL CHECK (rating >= 1 AND rating <= 5),
   text                VARCHAR(300),
   date_posted         TIMESTAMP       NOT NULL,
 

@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS transaction_items (
-  id                  SERIAL          NOT NULL,
-  transaction_id      INT             NOT NULL,
-  game_id             INT             NOT NULL,
-  price_paid          DECIMAL(14,6)   NOT NULL,
+  id                  BIGSERIAL       NOT NULL,
+  transaction_id      BIGINT          NOT NULL,
+  game_id             BIGINT          NOT NULL,
+  price_paid          DECIMAL(15,5)   NOT NULL,
   quantity            INT             NOT NULL DEFAULT 1,
 
   PRIMARY KEY (id),

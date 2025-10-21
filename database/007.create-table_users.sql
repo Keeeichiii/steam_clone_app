@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS users (
-  id                  SERIAL          NOT NULL,
-  credential_id       INT             NOT NULL, 
-  country_id          INT             NOT NULL,
+  id                  BIGSERIAL       NOT NULL,
+  credential_id       BIGINT          NOT NULL, 
+  country_id          BIGINT          NOT NULL,
   username            VARCHAR(45)     NOT NULL,
   registration_date   DATE            NOT NULL DEFAULT NOW(),
   first_name          VARCHAR(45),

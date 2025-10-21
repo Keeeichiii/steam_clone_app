@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS user_friends (
-  user_added_id       INT                   NOT NULL,
-  user_sender_id      INT                   NOT NULL,
+  user_added_id       BIGINT                NOT NULL,
+  user_sender_id      BIGINT                NOT NULL,
   status              user_friend_status    NOT NULL,
   request_at          TIMESTAMP             NOT NULL,
   accept_at           TIMESTAMP,

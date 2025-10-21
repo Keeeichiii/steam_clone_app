@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS users_roles (
-  user_id             INT             NOT NULL,
-  role_id             INT             NOT NULL,
+  user_id             BIGINT          NOT NULL,
+  role_id             BIGINT          NOT NULL,
   assigned_at         TIMESTAMP       NOT NULL,
 
   PRIMARY KEY (user_id, role_id),

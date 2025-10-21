@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS user_wallets (
-  id                  SERIAL          NOT NULL,
-  user_id             INT             NOT NULL,
-  balance             DECIMAL(10,2)   DEFAULT 0.00,
+  id                  BIGSERIAL       NOT NULL,
+  user_id             BIGINT          NOT NULL,
+  balance             DECIMAL(15,5)   DEFAULT 0.00 CHECK (balance >= 0),
   currency_code       VARCHAR(3)      NOT NULL,
   last_updated_at     TIMESTAMP       NOT NULL,
 
