@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS user_games (
   id                  BIGSERIAL       NOT NULL,
   user_id             BIGINT          NOT NULL,
   game_id             BIGINT          NOT NULL,
-  purchase_date       TIMESTAMP,
+  purchase_date       TIMESTAMP       DEFAULT NOW(),
   total_playtime      INT             DEFAULT 0,
 
   PRIMARY KEY (id),

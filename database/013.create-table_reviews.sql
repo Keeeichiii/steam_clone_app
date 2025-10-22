@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS reviews (
   game_id             BIGINT          NOT NULL,
   rating              SMALLINT        NOT NULL CHECK (rating >= 1 AND rating <= 5),
   text                VARCHAR(300),
-  date_posted         TIMESTAMP       NOT NULL,
+  date_posted         TIMESTAMP       NOT NULL DEFAULT NOW(),
 
   PRIMARY KEY (id),
   UNIQUE (user_id, game_id),

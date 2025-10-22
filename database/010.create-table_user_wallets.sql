@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS user_wallets (
   user_id             BIGINT          NOT NULL,
   balance             DECIMAL(15,5)   DEFAULT 0.00 CHECK (balance >= 0),
   currency_code       VARCHAR(3)      NOT NULL,
-  last_updated_at     TIMESTAMP       NOT NULL,
+  last_updated_at     TIMESTAMP       NOT NULL DEFAULT NOW(),
 
   PRIMARY KEY (id),
   UNIQUE (user_id),
