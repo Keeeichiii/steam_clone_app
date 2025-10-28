@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="create_table_transaction_items" author="steam-clone">
+        <comment>Создание таблицы элементов транзакций</comment>
+        
+        <createTable tableName="transaction_items">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="transaction_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="game_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="int" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_price" type="decimal(15,5)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="transaction_items"
+                baseColumnNames="transaction_id"
+                constraintName="fk_transaction_items_transaction_id"
+                referencedTableName="transactions"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="transaction_items"
+                baseColumnNames="game_id"
+                constraintName="fk_transaction_items_game_id"
+                referencedTableName="games"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+
+        <rollback>
+            <dropTable tableName="transaction_items"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
+

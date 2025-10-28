@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <include file="changesets/000-create-enum-types.xml" relativeToChangelogFile="true"/>
+
+    <include file="changesets/001-create-table-countries.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/002-create-table-roles.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/003-create-table-developers.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/004-create-table-publishers.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/005-create-table-genres.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/006-create-table-credentials.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/007-create-table-users.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/010-create-table-user-wallets.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/011-create-table-users-roles.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/008-create-table-games.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/009-create-table-discounts.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/012-create-table-user-games.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/013-create-table-reviews.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/014-create-table-user-friends.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/015-create-table-transactions.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/016-create-table-transaction-items.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/017-create-table-game-genres.xml" relativeToChangelogFile="true"/>
+    <include file="changesets/018-create-table-game-discounts.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

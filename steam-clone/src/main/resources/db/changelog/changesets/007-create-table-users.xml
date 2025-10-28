@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="create_table_users" author="steam-clone">
+        <comment>Создание таблицы пользователей</comment>
+        
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="credential_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(45)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="registration_date" type="date" defaultValueComputed="CURRENT_DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(45)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_name" type="varchar(45)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="profile_name" type="varchar(45)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="avatar_url" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="bio" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_activity" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="users"
+                baseColumnNames="credential_id"
+                constraintName="fk_users_credential_id"
+                referencedTableName="credentials"
+                referencedColumnNames="id"
+                onDelete="RESTRICT"
+                onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="users"
+                baseColumnNames="country_id"
+                constraintName="fk_users_country_id"
+                referencedTableName="countries"
+                referencedColumnNames="id"
+                onDelete="RESTRICT"
+                onUpdate="CASCADE"/>
+
+        <rollback>
+            <dropTable tableName="users"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
+

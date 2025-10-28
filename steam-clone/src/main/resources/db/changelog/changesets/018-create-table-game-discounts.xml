@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="create_table_game_discounts" author="steam-clone">
+        <comment>Создание таблицы связи игр и скидок</comment>
+        
+        <createTable tableName="game_discounts">
+            <column name="game_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="discount_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="game_discounts" columnNames="game_id, discount_id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="game_discounts"
+                baseColumnNames="game_id"
+                constraintName="fk_game_discounts_game_id"
+                referencedTableName="games"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="game_discounts"
+                baseColumnNames="discount_id"
+                constraintName="fk_game_discounts_discount_id"
+                referencedTableName="discounts"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+
+        <rollback>
+            <dropTable tableName="game_discounts"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
+

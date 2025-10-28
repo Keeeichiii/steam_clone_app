@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="create_table_games" author="steam-clone">
+        <comment>Создание таблицы игр</comment>
+        
+        <createTable tableName="games">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="developer_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="publisher_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="release_date" type="date">
+                <constraints nullable="true"/>
+            </column>
+            <column name="base_price" type="decimal(15,5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(300)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="average_rating" type="decimal(3,2)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="review_count" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="games"
+                baseColumnNames="developer_id"
+                constraintName="fk_games_developer_id"
+                referencedTableName="developers"
+                referencedColumnNames="id"
+                onDelete="RESTRICT"
+                onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="games"
+                baseColumnNames="publisher_id"
+                constraintName="fk_games_publisher_id"
+                referencedTableName="publishers"
+                referencedColumnNames="id"
+                onDelete="RESTRICT"
+                onUpdate="CASCADE"/>
+
+        <sql>
+            ALTER TABLE games ADD CONSTRAINT chk_games_base_price CHECK (base_price >= 0);
+        </sql>
+        
+        <sql>
+            ALTER TABLE games ADD CONSTRAINT chk_games_review_count CHECK (review_count >= 0);
+        </sql>
+
+        <rollback>
+            <dropTable tableName="games"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="create_table_game_genres" author="steam-clone">
+        <comment>Создание таблицы связи игр и жанров</comment>
+        
+        <createTable tableName="game_genres">
+            <column name="game_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="genre_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="game_genres" columnNames="game_id, genre_id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="game_genres"
+                baseColumnNames="game_id"
+                constraintName="fk_game_genres_game_id"
+                referencedTableName="games"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="game_genres"
+                baseColumnNames="genre_id"
+                constraintName="fk_game_genres_genre_id"
+                referencedTableName="genres"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+
+        <rollback>
+            <dropTable tableName="game_genres"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
+

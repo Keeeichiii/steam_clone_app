@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="create_table_user_friends" author="steam-clone">
+        <comment>Создание таблицы друзей пользователей</comment>
+        
+        <createTable tableName="user_friends">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="friend_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="user_friend_status" defaultValue="pending">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="user_friends" columnNames="user_id, friend_id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="user_friends"
+                baseColumnNames="user_id"
+                constraintName="fk_user_friends_user_id"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="user_friends"
+                baseColumnNames="friend_id"
+                constraintName="fk_user_friends_friend_id"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+
+        <rollback>
+            <dropTable tableName="user_friends"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
+
