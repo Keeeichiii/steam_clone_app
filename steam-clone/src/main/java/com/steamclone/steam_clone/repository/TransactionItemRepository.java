@@ -1,0 +1,9 @@
+package com.steamclone.steam_clone.repository;
+
+import com.steamclone.steam_clone.domain.TransactionItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TransactionItemRepository extends JpaRepository<TransactionItem, Long> {
+}
+
+
